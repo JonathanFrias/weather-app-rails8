@@ -1,0 +1,21 @@
+<!-- app/views/forecasts/index.html.erb -->
+<h1>Weather Forecast</h1>
+
+<%= form_tag forecasts_path, method: :post do %>
+  <%= label_tag :address, "Enter address:" %>
+  <%= text_field_tag :address, params[:address] %>
+  <%= submit_tag "Get Forecast" %>
+<% end %>
+
+<% if @forecast %>
+  <h2>Forecast for <%= params[:address] %></h2>
+  <p>Current Temperature: <%= @forecast[:temperature] %>°C</p>
+  <p>High: <%= @forecast[:high] %>°C</p>
+  <p>Low: <%= @forecast[:low] %>°C</p>
+  <p>Description: <%= @forecast[:description] %></p>
+  <% if @cached %>
+    <p><strong>This result was pulled from cache.</strong></p>
+  <% end %>
+<% elsif @error %>
+  <p>Error: <%= @error %></p>
+<% end %>
