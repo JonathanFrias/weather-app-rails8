@@ -18,7 +18,7 @@ class GetForecast < Solid::Process
       Continue(latitude:, longitude:)
     else
       # If we can't geocode the address, we don't want to cache a bad result
-      Rails.cache.delete("GetCoordinates-#{ddress}")
+      Rails.cache.delete("GetCoordinates-#{address}")
       Failure(:geocode_failure, **{ message: "Unable to find the address #{address} " })
     end
   end

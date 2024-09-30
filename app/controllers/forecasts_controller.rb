@@ -7,9 +7,6 @@ class ForecastsController < ApplicationController
     in [:geocode_failure, { message: }]
       flash.now[:alert] = message
     in [:forecast_failure, { **_data } ]
-      # We could potentially show what was fetched here even though it failed
-      flash.now[:alert] = "Could not fetch forecast data. Please try again later."
-    in _
       # We should have some error reporting here
       # Something like:
       # Rollbar.error("Could not fetch forecast data for #{params[:address]}")
