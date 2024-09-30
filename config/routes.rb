@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   root "forecasts#index"
-  post "forecasts", to: "forecasts#get_forecast"
+  resources :forecasts, only: %i[index create show]
 end

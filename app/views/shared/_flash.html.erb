@@ -1,0 +1,11 @@
+<%= turbo_frame_tag :flash do %>
+  <% if flash.any? %>
+    <div class="flash">
+      <% flash.each do |key, value| %>
+        <div class="flash-<%= key %>">
+          <%= value %>
+        </div>
+      <% end %>
+    </div>
+  <% end%>
+<% end %>

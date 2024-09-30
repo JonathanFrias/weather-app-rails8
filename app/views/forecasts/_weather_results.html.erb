@@ -1,0 +1,5 @@
+<%= turbo_frame_tag :weather_results do %>
+<pre>
+<%=JSON.pretty_generate(forecast_data)%>
+</pre>
+<% end %>

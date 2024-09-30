@@ -3,19 +3,8 @@
 
 <%= form_tag forecasts_path, method: :post do %>
   <%= label_tag :address, "Enter address:" %>
-  <%= text_field_tag :address, params[:address] %>
+  <%= text_field_tag :address, params[:address], value: "Jacksonville Beach" %>
   <%= submit_tag "Get Forecast" %>
 <% end %>
 
-<% if @forecast %>
-  <h2>Forecast for <%= params[:address] %></h2>
-  <p>Current Temperature: <%= @forecast[:temperature] %>°C</p>
-  <p>High: <%= @forecast[:high] %>°C</p>
-  <p>Low: <%= @forecast[:low] %>°C</p>
-  <p>Description: <%= @forecast[:description] %></p>
-  <% if @cached %>
-    <p><strong>This result was pulled from cache.</strong></p>
-  <% end %>
-<% elsif @error %>
-  <p>Error: <%= @error %></p>
-<% end %>
+<%= turbo_frame_tag :weather_results %>
