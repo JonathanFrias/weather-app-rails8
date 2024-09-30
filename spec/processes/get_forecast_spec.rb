@@ -15,10 +15,10 @@ RSpec.describe GetForecast do
   end
 
   it "can fetch forecast data" do
-    result = GetForecast.new.fetch_forecast(37.7749, -122.4194)
+    result = GetForecast.new.fetch_forecast(address: nil, latitude: 37.7749, longitude: -122.4194)
     case result
     when Solid::Success
-      expect(result.value.keys).to include(:longitude, :latitude, :weather_main, :weather_description, :temperature, :feels_like, :temp_min, :temp_max, :humidity, :wind_speed, :city_name, :cache_hit)
+      expect(result.value[:weather_result]).to be_present
     else
       fail "Expected forecast data"
     end

@@ -1,11 +1,12 @@
 class ForecastsController < ApplicationController
   def create
+    weather_result = nil
+    cache_hit = nil
     case GetForecast.call(address: params[:address])
-    in [:forecast, { **forecast_data } ]
-      @forecast_data = forecast_data
+    in [:forecast, { weather_result:, cache_hit: } ]
     in [:geocode_failure, { message: }]
       flash.now[:alert] = message
-    in [:forecast_failure, { forecast_data: }]
+    in [:forecast_failure, { **_data } ]
       # We could potentially show what was fetched here even though it failed
       flash.now[:alert] = "Could not fetch forecast data. Please try again later."
     in _
@@ -17,7 +18,7 @@ class ForecastsController < ApplicationController
 
     # Use Turbo Streams to update the page
     render turbo_stream: [
-      turbo_stream.replace(:weather_results, partial: "weather_results", locals: { forecast_data: @forecast_data }),
+      turbo_stream.replace(:weather_results, partial: "weather_results", locals: { weather_result:, cache_hit: }),
       turbo_stream.replace(:flash, partial: "shared/flash")
     ]
   end
