@@ -94,7 +94,7 @@ This constant removes the need to pay a refactoring tax in order to run tests, a
 
 So I've opted to use the fantastic `solid_cache` gem to handle caching. This application has 2 layers of caching to find the current forecast. 
 
-1. The first one is the address to coordinates layer. This cache does not have an expiry date because that coordinate location data does not become stale over time.
+1. The first one is the address to coordinates layer. This cache does not have an expiry date because that coordinate location data does not become stale over time. This uses the `geocoder` gem to accomplish this
 2. The second cache layer is for the weather that changes constantly. This is pretty simple since I'm using Rails' built in cache helpers
 
 ```ruby
