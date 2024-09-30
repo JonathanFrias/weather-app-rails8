@@ -32,9 +32,6 @@ in [:forecast, { weather_result:, cache_hit: } ]
 in [:geocode_failure, { message: }]
   flash.now[:alert] = message
 in [:forecast_failure, { **_data } ]
-  # We should have some error reporting here
-  # Something like:
-  # Rollbar.error("Could not fetch forecast data for #{params[:address]}")
   flash.now[:alert] = "Could not fetch forecast data. Please try again later."
 end
 
