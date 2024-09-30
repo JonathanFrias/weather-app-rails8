@@ -1,7 +1,7 @@
 class ForecastsController < ApplicationController
   def create
     weather_result = nil
-    cache_hit = nil
+    cache_hit = false
     case GetForecast.call(address: params[:address])
     in [:forecast, { weather_result:, cache_hit: } ]
     in [:geocode_failure, { message: }]
